@@ -63,6 +63,7 @@
 	],
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.8",
+		"svelte-sonner": "^1.0.5",
 		"tailwindcss": "^4.1.8"
 	}
 }

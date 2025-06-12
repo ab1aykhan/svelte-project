@@ -1,4 +1,6 @@
 <script lang="ts">
+	import ImagePlaceholder from '$lib/images/placeholder.avif';
+
 	interface CardProps {
 		imgUrl: string;
 		title: string;
@@ -7,12 +9,20 @@
 	}
 
 	let { imgUrl, title, subtitle = '', description }: CardProps = $props();
+
+	const handleImgError = (e: Event): void => {
+		(e.target as HTMLImageElement).src = ImagePlaceholder;
+	};
 </script>
 
 <div class="card p-4 shadow-xl shadow-xl cursor-pointer">
 	<aside class="card__aside mb-3">
 		<figure class="card__figure">
-			<img src={imgUrl} alt="card-img" />
+			{#if imgUrl}
+				<img src={imgUrl} alt="card-img" loading="lazy" onerror={handleImgError} />
+			{:else}
+				<img src={ImagePlaceholder} alt="img-placeholder" />
+			{/if}
 		</figure>
 	</aside>
 	<header class="card__header mb-3">
