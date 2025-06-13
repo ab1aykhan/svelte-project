@@ -4,11 +4,19 @@
 	import Card from '$lib/components/card.svelte';
 	import Loader from '$lib/components/loader.svelte';
 	import { Toaster, toast } from 'svelte-sonner';
+	import Modal from '$lib/components/modal.svelte';
 	import { API_BASE } from '$lib/config.js';
 
 	let productList = $state.raw<Product[]>([]);
 
 	let loading = $state<boolean>(false);
+
+	let showModal = $state<boolean>(false);
+
+	const openModal = () => {
+		console.log('aaaa');
+		showModal = !showModal;
+	};
 
 	const getProducts = async (): Promise<void> => {
 		try {
@@ -32,7 +40,13 @@
 	{:else if productList.length}
 		<div class="grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-2 max-md:grid-cols-3">
 			{#each productList as product}
-				<Card imgUrl={product.images[0]} title={product.title} description={product.description} />
+				<Card
+					imgUrl={product.images[0]}
+					title={product.title}
+					description={product.description}
+					onclickCard={openModal}
+					id={product.id}
+				/>
 			{/each}
 		</div>
 	{:else}

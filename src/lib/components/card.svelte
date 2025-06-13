@@ -6,9 +6,11 @@
 		title: string;
 		subtitle?: string;
 		description: string;
+		id: string | number;
+		onclickCard?: () => void | Promise<void>;
 	}
 
-	let { imgUrl, title, subtitle = '', description }: CardProps = $props();
+	let { imgUrl, title, subtitle = '', description, id }: CardProps = $props();
 
 	const handleImgError = (e: Event): void => {
 		(e.target as HTMLImageElement).src = ImagePlaceholder;
@@ -30,9 +32,12 @@
 		<h3 class="card__subtitle">{subtitle}</h3>
 	</header>
 	<div class="card__body">
-		<p class="card__description">
+		<p class="card__description mb-5">
 			{description}
 		</p>
+		{#if id}
+			<a href="/product/{id}" class="w-max ml-auto block text-blue-600">View full info</a>
+		{/if}
 	</div>
 </div>
 
