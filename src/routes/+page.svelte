@@ -37,7 +37,7 @@
 	<h1 class="text-2xl m-4">Product List</h1>
 	{#if loading}
 		<Loader />
-	{:else if productList.length}
+	{:else if productList.length}	
 		<div class="grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-2 max-md:grid-cols-3">
 			{#each productList as product}
 				<Card
