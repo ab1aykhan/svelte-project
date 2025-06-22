@@ -1,6 +1,6 @@
 import { API_BASE } from "$lib/config.ts";
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from "./$types.ts";
 
 
 export const load: PageServerLoad = async({fetch, params}: {fetch: any, params: any}) =>{

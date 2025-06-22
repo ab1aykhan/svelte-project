@@ -2,7 +2,7 @@
 	import { API_BASE } from '$lib/config.js';
 	import { onMount } from 'svelte';
 	import Category from './Category.svelte';
-	import type { Category as CategoryType } from '../types.ts
+	import type { Category as CategoryType } from '$lib/types.ts'
 	import { Toaster, toast } from 'svelte-sonner';
 
 	let categories = $state<CategoryType[]>([]);
