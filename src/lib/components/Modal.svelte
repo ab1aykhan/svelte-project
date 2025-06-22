@@ -1,4 +1,4 @@
-<script lang="ts">
+	<script lang="ts">
 	const { showModal = $bindable(), content } = $props();
 	let dialog: HTMLDialogElement | undefined = $state();
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Product } from './types.ts';
-	import Card from '$lib/components/card.svelte';
-	import Loader from '$lib/components/loader.svelte';
+	import Card from '$lib/components/Card.svelte';
+	import Loader from '$lib/components/Loader.svelte';
 	import { Toaster, toast } from 'svelte-sonner';
-	import Modal from '$lib/components/modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import { API_BASE } from '$lib/config.js';
 
 	let productList = $state.raw<Product[]>([]);
@@ -14,7 +14,6 @@
 	let showModal = $state<boolean>(false);
 
 	const openModal = () => {
-		console.log('aaaa');
 		showModal = !showModal;
 	};
 
@@ -37,7 +36,7 @@
 	<h1 class="text-2xl m-4">Product List</h1>
 	{#if loading}
 		<Loader />
-	{:else if productList.length}	
+	{:else if productList.length}
 		<div class="grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-2 max-md:grid-cols-3">
 			{#each productList as product}
 				<Card
