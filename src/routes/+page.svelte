@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Product } from './types.ts';
+	import type { Product } from '../lib/types.ts';
 	import Card from '$lib/components/Card.svelte';
 	import Loader from '$lib/components/Loader.svelte';
 	import { Toaster, toast } from 'svelte-sonner';

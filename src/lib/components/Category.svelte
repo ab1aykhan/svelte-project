@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Category } from '../../routes/types.js';
+	import type { Category } from '$lib/types.ts'
 
 	const { name, image, slug, id }: Category = $props();
 </script>
