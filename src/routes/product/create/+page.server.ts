@@ -1,30 +1,32 @@
-import { API_BASE } from "$lib/config.js";
+// import { API_BASE } from "$lib/config.ts";
 import type { Actions } from "@sveltejs/kit";
+import { z } from 'zod/v4';
+import { fail, superValidate } from "sveltekit-superforms";
+import { zod4 } from 'sveltekit-superforms/adapters';
+
+
+const productSchema = z.object({
+	title: z.string().min(1),
+	price: z.number().positive(),
+	description: z.string().min(1)
+})
+
+export const load = async (event) => {
+	const form = await superValidate(event,zod4(productSchema))
+	return {
+		 form
+	}
+}
 
 export const actions = {
-	default: async ({request}) => {
-		const formData = await request.formData();
-		const title = formData.get('title');
-		const price = formData.get('price');
-		const description = formData.get('description');
+	default: async (event) => {
 
-		const res = await fetch(`${API_BASE}/products/`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ 
-				title,
-				price,
-				description,
-				categoryId: 1,
-				images: ['']
-			 })
-		  });
+		const form = await superValidate(event, zod4(productSchema))
 
-
-		  if (!res.ok) {
-			return { success: false, error: 'Failed to send data to external API' };
-		  }
-
-		return { success: true };
+		if(!form.valid) {
+			return fail(400, {
+				form
+			})
+		}
 	}
 } satisfies Actions;
