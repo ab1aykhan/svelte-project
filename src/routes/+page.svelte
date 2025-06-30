@@ -7,6 +7,12 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import { API_BASE } from '$lib/config.js';
 
+	import type { PageData } from './$houdini';
+
+	let { data }: PageData = $props();
+
+	let { Products } = $derived(data);
+
 	let productList = $state.raw<Product[]>([]);
 
 	let loading = $state<boolean>(false);
@@ -34,11 +40,11 @@
 
 <div class="p-4 w-full h-full overflow-auto">
 	<h1 class="text-2xl m-4">Product List</h1>
-	{#if loading}
+	{#if $Products.fetching}
 		<Loader />
-	{:else if productList.length}
+	{:else if $Products.data.products.length}
 		<div class="grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-2 max-md:grid-cols-3">
-			{#each productList as product}
+			{#each $Products.data.products as product}
 				<Card
 					imgUrl={product.images[0]}
 					title={product.title}
