@@ -7,35 +7,36 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import { API_BASE } from '$lib/config.js';
 
-	import type { PageData } from './$houdini';
+	import type { PageData, ProductsStore } from './$houdini';
+	import { query } from '$houdini';
 
 	let { data }: PageData = $props();
 
 	let { Products } = $derived(data);
 
-	let productList = $state.raw<Product[]>([]);
+	// let productList = $state.raw<Product[]>([]);
 
-	let loading = $state<boolean>(false);
+	// let loading = $state<boolean>(false);
 
-	let showModal = $state<boolean>(false);
+	// let showModal = $state<boolean>(false);
 
-	const openModal = () => {
-		showModal = !showModal;
-	};
+	// const openModal = () => {
+	// 	showModal = !showModal;
+	// };
 
-	const getProducts = async (): Promise<void> => {
-		try {
-			loading = true;
-			const response = await fetch(`${API_BASE}/products`);
-			productList = await response.json();
-		} catch (error) {
-			toast.error(`Error fetching products ${error}`);
-		} finally {
-			loading = false;
-		}
-	};
+	// const getProducts = async (): Promise<void> => {
+	// 	try {
+	// 		loading = true;
+	// 		const response = await fetch(`${API_BASE}/products`);
+	// 		productList = await response.json();
+	// 	} catch (error) {
+	// 		toast.error(`Error fetching products ${error}`);
+	// 	} finally {
+	// 		loading = false;
+	// 	}
+	// };
 
-	onMount(getProducts);
+	// onMount(getProducts);
 </script>
 
 <div class="p-4 w-full h-full overflow-auto">
@@ -49,7 +50,6 @@
 					imgUrl={product.images[0]}
 					title={product.title}
 					description={product.description}
-					onclickCard={openModal}
 					id={product.id}
 				/>
 			{/each}

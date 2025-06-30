@@ -1,5 +1,5 @@
-query Products{
-  products {
+query Products(title: String){
+  products(title: $title) {
     id
     title
     price
